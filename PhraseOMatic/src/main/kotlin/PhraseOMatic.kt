@@ -43,3 +43,5 @@ fun randomArrayIndex(theArraySize: Int): Int {
 // it means that you can’t reuse the -variable- for another array object | it holds a reference to that array forever
 // however, the array object itself can be updated
 // the restriction is on the variable itself & not the array & its contents || items in the array can be changed
+
+// Kotlin's basic types: Byte, Short, Int, Long, Float, Double, Boolean, Char and String.
