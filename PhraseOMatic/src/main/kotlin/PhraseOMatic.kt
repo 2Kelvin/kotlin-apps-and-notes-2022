@@ -36,3 +36,10 @@ fun randomArrayIndex(theArraySize: Int): Int {
 // ###  explicitly define the array type using "Array<Type>" ###
 // e.g ->  var byteArray: Array<Byte> = arrayOf(1,2,3)
 // simply specify the type of array you want to create by putting the type between the angle brackets (< >)
+
+// If an array variable is declared using 'var', means it holds a reference to an array
+// and also can be updated to refer to a different array of the - same type -
+// if you declare an array with 'val', that array can NEVER be changed
+// it means that you can’t reuse the -variable- for another array object | it holds a reference to that array forever
+// however, the array object itself can be updated
+// the restriction is on the variable itself & not the array & its contents || items in the array can be changed
