@@ -1,19 +1,56 @@
 fun main() {
     val gameArrOptions = arrayOf("Rock", "Paper", "Scissors")
     val gameChoice = getGameChoice(gameArrOptions)
-    println(getUserChoice(gameArrOptions))
+    val userChoice = getUserChoice(gameArrOptions)
+    printResult(gameChoice, userChoice)
 }
 
-// function computer choice
-fun getGameChoice(anArray: Array<String>) = anArray[(Math.random() * anArray.size).toInt()]
+// computer choice
+fun getGameChoice(optionsArr: Array<String>) = optionsArr[(Math.random() * optionsArr.size).toInt()]
 
-// function user's choice
-fun getUserChoice(optionsArr: Array<String>) {
-    print("Please enter one of the following: ")
-    for (userChoice in optionsArr) print(" $userChoice")
-    println(".")
+// user's choice
+fun getUserChoice(optionsArr: Array<String>): String {
+    var isValidChoice = false  // this variable will keep tabs on whether the user's input is valid or not
+    var userInputChoice = ""
 
-    val userInput = readLine()
+    // keep looping until the user enters a valid choice
+    while (!isValidChoice) {
+        // print a message asking the user to pick a choice
+        print("Please enter one of the following: ")
+        for (aChoice in optionsArr) print(" $aChoice")
+        println(".")
+
+        // offer user an input area, read it & return their choice
+        val userInput = readLine()
+        // input validation: if the user input is not empty & their input is in the array passed in, continue
+        if (userInput != null && userInput in optionsArr) {
+            isValidChoice = true
+            userInputChoice = userInput
+        }
+        // if the choice is invalid, tell the user to enter a valid choice
+        if (!isValidChoice) println("Please enter a valid choice.")
+    }
+
+    return userInputChoice
+}
+
+// print winner / results
+fun printResult(gameChoiceParam: String, userChoiceParam: String) {
+    val result: String
+
+    // calculating the result & picking a winner
+    when {
+        (userChoiceParam == gameChoiceParam) -> result = "Tie!"
+        (
+                (userChoiceParam ==  "Rock" && gameChoiceParam =="Scissors") ||
+                (userChoiceParam == "Paper" && gameChoiceParam =="Rock") ||
+                (userChoiceParam == "Scissors" && gameChoiceParam == "Paper")
+        ) -> result = "You win!"
+        else -> result = "You lose!"
+    }
+
+    // printing out the results
+    println("You chose $userChoiceParam. I chose $gameChoiceParam. $result")
 }
 
 
@@ -86,3 +123,19 @@ fun getUserChoice(optionsArr: Array<String>) {
 // If the input stream for your application has been redirected to a file, the
 // readLine() function returns null if the end of file has been reached
 // null means 'no value'
+
+// "And" / "&&"  and "Or" / "||" operators
+// And / && --> expects ALL statements to be true; if one is false, the entire expression is false
+// if the left expression is false, Kotlin doesn't bother to evaluate the right expression
+// Or / ||  --> it only expects ONE of the expressions to be true; doesn't have to be both, to execute
+// if the left expression is true, Kotlin doesn't bother to evaluate the right expression
+
+// "!="  --> means 'is not equal to'
+
+// "!"  --> signifies 'not' e.g. if (!broken) {...} --> basically signifies that a condition is 'false'
+
+// when using many and long boolean expressions, enclose them in brackets / parenthesis "()"
+// --> it makes your code clearer & easy to read
+
+// Kotlin includes "lowerCase()", "upperCase()" and "replaceFirstChar{}" methods
+//to create a lowercase, uppercase or 1st letter capitalization version of a String.
