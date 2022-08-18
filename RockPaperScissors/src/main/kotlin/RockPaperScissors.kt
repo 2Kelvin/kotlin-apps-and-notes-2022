@@ -1,13 +1,23 @@
-// a function  ->  REUSABLE chunk of code that performs a SPECIFIC TASK
 fun main() {
     val gameArrOptions = arrayOf("Rock", "Paper", "Scissors")
-
     val gameChoice = getGameChoice(gameArrOptions)
+    println(getUserChoice(gameArrOptions))
 }
 
 // function computer choice
 fun getGameChoice(anArray: Array<String>) = anArray[(Math.random() * anArray.size).toInt()]
 
+// function user's choice
+fun getUserChoice(optionsArr: Array<String>) {
+    print("Please enter one of the following: ")
+    for (userChoice in optionsArr) print(" $userChoice")
+    println(".")
+
+    val userInput = readLine()
+}
+
+
+// a function  ->  REUSABLE chunk of code that performs a SPECIFIC TASK
 // if a function has a parameter, you MUST pass it an argument
 // the argument MUST be a value of the appropriate type i.e. argument's value type should be same as parameter type
 // e.g. you cannot pass a String argument in place of an Int parameter, this will result in a compile error
@@ -41,3 +51,38 @@ fun getGameChoice(anArray: Array<String>) = anArray[(Math.random() * anArray.siz
 // parameter variables are treated as local variables created using val
 // therefore, you CANNOT reassign their values
 // you can’t assign a new value to any of a function’s parameter variables
+
+// FOR LOOP
+// useful in situations where you want to loop through a fixed range of numbers, or through every item in an array
+// looping through a range of numbers e.g. (1 to 10) -> for (x in 1..10) { }
+// it means for each number between 1 and 10, assign the number to a variable named x, and run the body of the loop
+// specify a range of values using '..' operator
+// at the beginning of each loop, it assigns the variable given ('x' in our case) to the current number in the loop
+// if the body loop consists of a single expression/ statement, omit the curly braces
+// in -> 1..10 -> the 1 is the start number and 10 is the end number; they'll all be used in the body loop code
+// if you wanted to exclude the end number e.g. 10, use keyword "until" e.g. for (x in 1 until 10) {}
+// this will use numbers 1 to 9 and will exclude number 10
+// increment operator shortcut: (x++)  : same as (x = x + 1)
+// decrement operator shortcut: (x--)  : same as (x = x - 1)
+// If you want to add a number other than 1 to a variable, you can use the (+= )operator e.g. (x += 7) : same as (x = x + 7)
+// Similarly, you can use shortcuts:
+// -->  (-=) for subtraction
+// -->  (*=) for multiplication and
+// -->  (/=) for division
+
+// While loops run while a given "condition" is true || For loops run over a "range" of values or items
+// if you want to loop in reverse order, use "downTo" --> replace '..' or 'until' with 'downTo'
+// also place the largest number as the 1st one & the smallest one as the last number
+// e.g. for (x in 10 downTo 1) {}
+// '..' , 'until' and 'downTo' step through the range one number at a time
+// to skip numbers in a range, use the keyword "step" followed by a number of how much you want to skip by
+// e.g. for (1 in 1..10 step 2) {} -->  this will use the numbers; 1, 3, 5, 7 and 9
+
+// for loops are also mostly used to iterate through items in an array
+
+// "readLine()" function is used to read the user's input
+// it reads a line of input from the standard input stream e.g. an IDE output window
+// it returns a String value; the text entered by the user
+// If the input stream for your application has been redirected to a file, the
+// readLine() function returns null if the end of file has been reached
+// null means 'no value'
