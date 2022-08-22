@@ -1,5 +1,39 @@
+// keyword "open" tells the compiler that the class is a 'superclass'
+// properties & functions using keyword "open" mean that they can be "overridden" by the subclasses
+open class Animal {
+    open val image = ""
+    open val food = ""
+    open val habitat = ""
+    var hunger = 10
 
+    open fun makeNoise () {
+        println("The Animal is making a noise")
+    }
+    open fun eat () {
+        println("The Animal is eating")
+    }
+    open fun roam () {
+        println("The Animal is roaming")
+    }
+    fun sleep () {
+        println("The Animal is sleeping")
+    }
+}
 
+class Hippo : Animal () {
+    override val image = "hippo.jpg"
+    override val food = "grass"
+    override val habitat: String // overriding like this and like the 2 properties above, is the same
+        get() = "water"
+}
+
+fun main() {
+    val aHippo = Hippo()
+    val aAnimal = Animal()
+
+    println(aHippo.habitat)
+    println("Animal habitat is ${aAnimal.habitat}")
+}
 
 
 // INHERITANCE: involves;
@@ -10,7 +44,7 @@
 // subclasses inherit all the properties & functions of their superclass
 // e.g. superclass: Car, subclass: ConvertibleCar
 // subclasses can have/ add specific properties & functions of their own
-// they can also tweak some of the properties & functions they inherit from the superclass; this is called "overriding"
+// they can also tweak properties & functions they inherit from the superclass; this is called "overriding"
 // *** A superclass contains common properties and functions that are inherited by one or more subclasses ***
 // *** A subclass can include extra properties and functions, and can override the things that it inherits ***
 
@@ -31,3 +65,22 @@
 // ask, does it make sense to say that -> "a Kitchen HAS-A Fridge"
 // if yes, that means the Kitchen "has a reference" to the Fridge class BUT neither of them is inheriting from one another
 //i.e. the Kitchen class has a Fridge property -> the Fridge becomes a property of Kitchen through a HAS-A relationship
+
+// CREATING A SUPERCLASS
+// To use a class as a superclass, declare it with the keyword 'open'.
+// Everything(properties and functions) you want to override must also use the keyword "open"
+
+// HOW TO INHERIT FROM A SUPERCLASS
+// To make a class inherit from another, add a colon (:) to the class header followed by the name of the superclass
+// This makes the class a subclass, and receives all the properties and functions of the class it inherits from (superclass)
+// e.g. class Hippo above is inheriting from Animal
+// Calling the superclass constructor is mandatory i.e. you must include the () after the superclass' name
+// this ensures that the superclass initializes all the properties into the subclass
+// If the superclass constructor includes parameters, you must pass values for these parameters when you call the constructor
+
+// OVERRIDING PROPERTIES & FUNCTIONS
+// you override an inherited property by using the keyword "override"
+// *** you use keyword "override" to override properties defined in the superclass using 'val' ***
+// *** otherwise, if the superclass properties you want to override are defined using 'var', just reassign values to them in the subclass's initializer block...
+// since the initializer block runs immediately after the constructor has initialized values & remember var can be reassigned values***
+// if you define a property in the superclass using val, you must override it in the subclass if you want to assign a different value to it
