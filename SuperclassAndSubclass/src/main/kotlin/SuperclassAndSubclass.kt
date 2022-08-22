@@ -23,8 +23,8 @@ open class Animal {
 class Hippo : Animal () {
     override val image = "hippo.jpg"
     override val food = "grass"
-    override val habitat: String // overriding like this and like the 2 properties above, is the same
-        get() = "water"
+    override val habitat: String // overriding like this and like the above properties, gives the same results.
+        get() = "water" // Just that in this case, I'm overriding the property's getter function
 }
 
 fun main() {
@@ -84,3 +84,9 @@ fun main() {
 // *** otherwise, if the superclass properties you want to override are defined using 'var', just reassign values to them in the subclass's initializer block...
 // since the initializer block runs immediately after the constructor has initialized values & remember var can be reassigned values***
 // if you define a property in the superclass using val, you must override it in the subclass if you want to assign a different value to it
+// overriding a property just to initialize it with a different value is not the only way to use 'override'
+// use 'override' to:
+// #override a property's getter and setter
+// #override a superclass 'val' property with a subclass 'var' property: NOTE, vice versa won't work: you can't override superclass 'var' with subclass 'val'
+// #override a property's type with a superclass subtype
+// #override any properties defined in the superclass' constructor -> use keyword 'open' in the constructor then keyword 'override' in the subclass
