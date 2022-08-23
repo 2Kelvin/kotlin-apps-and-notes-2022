@@ -55,6 +55,13 @@ class Wolf : Canine() {
     }
 }
 
+class Vet {
+    fun givShot(animal: Animal) {
+        // code to do something medical
+        animal.makeNoise()
+    }
+}
+
 fun main() {
     //hippo object
     val aHippo = Hippo()
@@ -69,6 +76,27 @@ fun main() {
     wolf.roam() // fun overridden in Canine superclass
     wolf.eat()  //fun overridden in Wolf class
     wolf.makeNoise() //fun overridden in Wolf class
+    println()
+
+    // array
+    val animals = arrayOf(Hippo(), Wolf())
+    for (eachAnimal in animals) {
+        eachAnimal.roam()
+        eachAnimal.eat()
+    }
+    println()
+
+    //polymorphism  -->  the ability to use any subtype object in place of its supertype
+    // As different subclasses can have different implementations of the same function (through overriding),
+    // it allows each object to respond to function calls in the way that’s most appropriate for each object
+    val veterinary = Vet()
+    val wolf2 = Wolf()
+    val hippo2 = Hippo()
+    // although we are expecting to pass an Animal object...
+    // ...the 2 Animal subtypes passed will work because of the IS-A relationship
+    // Wolf IS-A Animal and Hippo IS-A Animal
+    veterinary.givShot(wolf2)
+    veterinary.givShot(hippo2)
 }
 
 
@@ -151,3 +179,7 @@ fun main() {
 // i.e. the one that’s lowest on the inheritance tree
 
 // *** Through inheritance, all subclasses have ALL the properties & functions defined in the superclass ***
+
+// You can use a subclass in any place where the superclass type is expected
+// Polymorphism means “many forms”.
+// It allows different subclasses to have different implementations of the same function
