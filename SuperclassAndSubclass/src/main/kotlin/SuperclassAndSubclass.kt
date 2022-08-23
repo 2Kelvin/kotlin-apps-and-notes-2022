@@ -25,14 +25,50 @@ class Hippo : Animal () {
     override val food = "grass"
     override val habitat: String // overriding like this and like the above properties, gives the same results.
         get() = "water" // Just that in this case, I'm overriding the property's getter function
+
+    override fun makeNoise() {
+        println("Grunt! Grunt!")
+    }
+
+    override fun eat() {
+        println("The Hippo is eating $food.")
+    }
+}
+
+open class Canine : Animal() {
+    override fun roam() {
+        println("The Canine is roaming")
+    }
+}
+
+class Wolf : Canine() {
+    override val image = "wolf.png"
+    override val food = "meat"
+    override val habitat = "forests"
+
+    override fun makeNoise() {
+        println("The Wolf is howling!")
+    }
+
+    override fun eat() {
+        println("The Wolf is eating $food")
+    }
 }
 
 fun main() {
+    //hippo object
     val aHippo = Hippo()
-    val aAnimal = Animal()
+    aHippo.eat()
+    aHippo.makeNoise()
+    aHippo.sleep()
+    println()
 
-    println(aHippo.habitat)
-    println("Animal habitat is ${aAnimal.habitat}")
+    //wolf object
+    val wolf = Wolf()
+    wolf.sleep() //fun is in Animal
+    wolf.roam() // fun overridden in Canine superclass
+    wolf.eat()  //fun overridden in Wolf class
+    wolf.makeNoise() //fun overridden in Wolf class
 }
 
 
@@ -78,7 +114,7 @@ fun main() {
 // this ensures that the superclass initializes all the properties into the subclass
 // If the superclass constructor includes parameters, you must pass values for these parameters when you call the constructor
 
-// OVERRIDING PROPERTIES & FUNCTIONS
+// OVERRIDING PROPERTIES
 // you override an inherited property by using the keyword "override"
 // *** you use keyword "override" to override properties defined in the superclass using 'val' ***
 // *** otherwise, if the superclass properties you want to override are defined using 'var', just reassign values to them in the subclass's initializer block...
@@ -90,3 +126,28 @@ fun main() {
 // #override a superclass 'val' property with a subclass 'var' property: NOTE, vice versa won't work: you can't override superclass 'var' with subclass 'val'
 // #override a property's type with a superclass subtype
 // #override any properties defined in the superclass' constructor -> use keyword 'open' in the constructor then keyword 'override' in the subclass
+
+// OVERRIDING FUNCTIONS
+// you override a function in a similar way to how you override a property
+// i.e. use the "open" keyword with the fun in the superclass, and keyword "override" in the subclass
+// *** 2 Rules on overriding functions:
+    // 1 ->  The function parameters in the subclass must match those in the superclass
+    // 2 ->  The function return types must be compatible
+        // Whatever the superclass function declares as a return type for the function, the
+        // overriding function must return either the same type, or a subclass type
+        // A subclass type is guaranteed to do anything its superclass declares
+        // therefore, it’s safe to return a subclass where the superclass is expected
+
+// when a function/property is declared 'open' in the superclass, ready to be overridden, it stays open in all the subclasses that inherit it no matter how many in the tree...
+// ...even if it's overridden. It still stays 'open'
+// this is so that you don't have to declare it open again in the subclasses down the tree in order to override it again
+// you just use the keyword 'override' each time you tweak it in all the subclasses down the tree (just like you would normally do)
+// *** however, to stop a function/ property from being overridden further down the class hierarchy, prefix it with keyword "final"
+// e.g. final override fun makeNose() {...}
+// this means that, that class' subclasses cannot override the function/property at all || that is the last class to override the function/property
+
+// when you call a function/method through an object, e.g. wolf.eat()...
+// ...you’re calling the most specific version of the function for that object type
+// i.e. the one that’s lowest on the inheritance tree
+
+// *** Through inheritance, all subclasses have ALL the properties & functions defined in the superclass ***
